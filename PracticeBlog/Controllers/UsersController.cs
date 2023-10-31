@@ -17,6 +17,15 @@ namespace PracticeBlog.Controllers
         {
             _repo = repo;
         }
+
+        [HttpGet]
+        [Route("Authenticate")]
+        public IActionResult Authenticate()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [Route("Authenticate")]
         public async Task<User> Authenticate(string login, string password)
@@ -45,45 +54,62 @@ namespace PracticeBlog.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
             return user;
         }
+
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var users = await _repo.GetAll();
             return View(users);
         }
+
+
         [HttpGet]
         public IActionResult GetUserById()
         {
             return View();
         }
+
+
         [HttpPost]
         public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _repo.Get(id);
             return View(user);
         }
+
+
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
+
         [HttpPost]
+        [Route("Register")]
         public async Task<IActionResult> Register(User newUser)
         {
             await _repo.Add(newUser);
             return View(newUser);
         }
+
+
         [HttpGet]
         public IActionResult Delete()
         {
             return View();
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Delete(User user)
         {
             await _repo.Delete(user);
             return View(user);
         }
+
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("Update")]
@@ -91,6 +117,8 @@ namespace PracticeBlog.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Update(User user)
         {

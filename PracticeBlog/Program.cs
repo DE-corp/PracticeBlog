@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using PracticeBlog.Data.Context;
 using PracticeBlog.Data.Models;
 using PracticeBlog.Data.Repositories;
@@ -10,9 +11,6 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
-        builder.Services.AddControllersWithViews();
-
         // Add DB
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services
@@ -23,7 +21,27 @@ internal class Program
                 .AddCustomRepository<Comment, CommentRepository>()
                 .AddCustomRepository<Tag, TagRepository>();
 
+        builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "PracticeBlog", Version = "v1" }); });
+
+        builder.Services.AddAuthentication(options => options.DefaultScheme = "Coockies").AddCookie("Coockies", options =>
+        {
+            options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
+            {
+                OnRedirectToLogin = redirectContext =>
+                {
+                    redirectContext.HttpContext.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                }
+            };
+        });
+
+        // Add services to the container.
+        builder.Services.AddControllersWithViews();
+
         var app = builder.Build();
+
+        app.UseSwagger();
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PracticeBlog v1"));
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
@@ -38,6 +56,7 @@ internal class Program
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllerRoute(
