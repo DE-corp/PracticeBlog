@@ -13,9 +13,5 @@ namespace PracticeBlog.Data.Repositories
             Set.Add(user);
             await _db.SaveChangesAsync();
         }
-        public User GetByLogin(string login)
-        {
-            return Set.FirstOrDefault(x => x.Login == login);
-        }
     }
 }

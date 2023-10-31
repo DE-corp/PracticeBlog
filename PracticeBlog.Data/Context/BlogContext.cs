@@ -13,5 +13,20 @@ namespace PracticeBlog.Data.Context
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>().ToTable("Users");
+            builder.Entity<Article>().ToTable("Articles");
+            builder.Entity<Tag>().ToTable("Tags");
+            builder.Entity<Comment>().ToTable("Comments");
+
+            builder.Entity<Comment>()
+                .HasOne(a => a.User)
+                .WithMany(b => b.Comments)
+                .HasForeignKey(c => c.UserID)
+                .HasPrincipalKey(d => d.ID)
+                .IsRequired(false);
+        }
     }
 }

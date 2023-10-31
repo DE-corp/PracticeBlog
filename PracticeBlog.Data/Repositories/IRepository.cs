@@ -1,4 +1,6 @@
-﻿namespace PracticeBlog.Data.Repositories
+﻿using PracticeBlog.Data.Models;
+
+namespace PracticeBlog.Data.Repositories
 {
     public interface IRepository<T> where T : class
     {
@@ -7,5 +9,6 @@
         Task Add(T item);
         Task Update(T item);
         Task Delete(T item);
+        User GetByLogin(string login);
     }
 }

@@ -11,9 +11,9 @@ namespace PracticeBlog.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly UserRepository _repo;
+        private readonly IRepository<User> _repo;
 
-        public UsersController(UserRepository repo)
+        public UsersController(IRepository<User> repo)
         {
             _repo = repo;
         }
@@ -60,7 +60,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await _repo.GetAll();
-            return View(users);
+            return StatusCode(200, users);
         }
 
 
@@ -91,7 +91,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Register(User newUser)
         {
             await _repo.Add(newUser);
-            return View(newUser);
+            return StatusCode(200, newUser);
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PracticeBlog.Data.Context;
+using PracticeBlog.Data.Models;
 
 namespace PracticeBlog.Data.Repositories
 {
@@ -44,6 +45,11 @@ namespace PracticeBlog.Data.Repositories
         {
             Set.Update(item);
             await _db.SaveChangesAsync();
+        }
+
+        public User GetByLogin(string login)
+        {
+            return Set.FirstOrDefault(x => (x as User).Login == login) as User;
         }
     }
 }

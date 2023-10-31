@@ -18,7 +18,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Index()
         {
             var tags = await _repo.GetAll();
-            return View(tags);
+            return StatusCode(200, tags);
         }
 
 

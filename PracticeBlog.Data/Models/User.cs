@@ -10,6 +10,7 @@ namespace PracticeBlog.Data.Models
         public string Login { get; set; }
         public string Password { get; set; }
         public int Age { get; set; }
-        public ICollection<Role> Roles { get; set; } = new List<Role>();
+        public List<Role> Roles { get; set; } = new List<Role>();
+        public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }
