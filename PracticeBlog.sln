@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeBlog", "PracticeBlog\PracticeBlog.csproj", "{8F7DB56C-8F82-4A3A-8C7C-362E8ED51927}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeBlog.Data", "PracticeBlog.Data\PracticeBlog.Data.csproj", "{2CA62808-CBAF-479E-AFAC-ECD131781886}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F7DB56C-8F82-4A3A-8C7C-362E8ED51927}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F7DB56C-8F82-4A3A-8C7C-362E8ED51927}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F7DB56C-8F82-4A3A-8C7C-362E8ED51927}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F7DB56C-8F82-4A3A-8C7C-362E8ED51927}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CA62808-CBAF-479E-AFAC-ECD131781886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA62808-CBAF-479E-AFAC-ECD131781886}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA62808-CBAF-479E-AFAC-ECD131781886}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CA62808-CBAF-479E-AFAC-ECD131781886}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35FF2684-53D5-4001-9413-53E8AD7DCF25}
+	EndGlobalSection
+EndGlobal
