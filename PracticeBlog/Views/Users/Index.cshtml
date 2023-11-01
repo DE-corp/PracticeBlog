@@ -1,0 +1,33 @@
+﻿﻿@{
+    ViewData["Title"] = "View users";
+}
+
+<div clamarging background-white">
+    <h4 class="center">Список пользователей!</h4>
+    <a class="text-blue" asp-area="" asp-controller="Users" asp-action="Register">Добавить пользователя</a>
+    @foreach (var user in Model)
+    {
+        <div class="card" style="width: 18rem; margin-top:30px">
+            <div class="card-body">
+                <h5 class="card-title" style="color:blue">@user.FirstName @user.LastName</h5>
+                <div class="rolebox">
+                    @if (user.Roles.Count != 0)
+                    {
+
+                        @foreach (var role in user.Roles)
+                        {
+                            <span class="badge badge-primary" style="margin:5px,15px">role.Name</span>
+
+                        }
+                    }
+                    else
+                    {
+                        <span class="badge badge-primary" style="margin:5px,15px">User</span>
+                    }
+                </div>
+                <p class="text-muted" style="margin-top:20px">@user.Login</p>
+            </div>
+        </div>
+        <br>
+    }
+</div>

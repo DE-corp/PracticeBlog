@@ -1,0 +1,40 @@
+﻿@model PracticeBlog.Data.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div>
+    @if (Model == null)
+    {
+        <form class="frm" method="post" asp-controller="Users" asp-action="Register">
+            <h1 class="h3 mb-3 fw-normal">Регистрация пользователя</h1>
+            <div class="form-floating">
+                <label for="floatingInput">Имя</label>
+                <input asp-for="FirstName" class="form-control" id="floatingInput">
+            </div>
+            <div class="form-floating">
+                <label for="floatingInput">Фамилия</label>
+                <input asp-for="LastName" class="form-control" id="floatingInput">
+            </div>
+            <div class="form-floating">
+                <label for="floatingInput">Адрес эл. почты</label>
+                <input asp-for="Login" class="form-control" id="floatingInput">
+            </div>
+            <div class="form-floating">
+                <label for="floatingPassword">Пароль</label>
+                <input asp-for="Password" class="form-control" id="floatingPassword">
+            </div>
+            <div class="form-floating">
+                <label for="floatingPassword">Возраст</label>
+                <input asp-for="Age" class="form-control" id="floatingPassword">
+            </div>
+            <br>
+            <button class="btn-primary" type="submit" padding=30>Зарегистрироваться</button>
+        </form>
+    }
+    else
+    {
+        @await Html.PartialAsync("_Thanks")
+    }
+</div>

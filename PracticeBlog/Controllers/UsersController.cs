@@ -28,7 +28,7 @@ namespace PracticeBlog.Controllers
 
         [HttpPost]
         [Route("Authenticate")]
-        public async Task<User> Authenticate(string login, string password)
+        public async Task<IActionResult> Authenticate(string login, string password)
         {
             if (String.IsNullOrEmpty(login) ||
               String.IsNullOrEmpty(password))
@@ -40,19 +40,15 @@ namespace PracticeBlog.Controllers
 
             if (user.Password != password)
                 throw new AuthenticationException("Введенный пароль не корректен");
+            List<Claim> userClaims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, user.Login),
+                            new Claim(ClaimTypes.Role, user.Role)
+                        };
 
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Roles.FirstOrDefault().Name)
-            };
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(
-                claims,
-                "AppCockie",
-                ClaimsIdentity.DefaultNameClaimType,
-                ClaimsIdentity.DefaultRoleClaimType);
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-            return user;
+            var identity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+            return View("GetUserByID", user);
         }
 
 
@@ -60,7 +56,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await _repo.GetAll();
-            return StatusCode(200, users);
+            return View(users);
         }
 
 
@@ -91,7 +87,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Register(User newUser)
         {
             await _repo.Add(newUser);
-            return StatusCode(200, newUser);
+            return View(newUser);
         }
 
 

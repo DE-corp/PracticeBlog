@@ -1,0 +1,26 @@
+﻿﻿@{
+    ViewData["Title"] = "View user";
+}
+
+<div clamarging background-white">
+    <div class="blog-main">
+        <h4 class="blog-post-title">@Model.FirstName @Model.LastName</h4><br>
+        <h5>@Model.Age лет</h5>
+        <div class="rolebox">
+            @if (@Model.Roles.Count != 0)
+            {
+
+                @foreach (var role in @Model.Tags)
+                {
+                    <span class="badge badge-primary">role.Name</span>
+
+                }
+            }
+            else
+            {
+                <span class="badge badge-primary">User</span>
+            }
+        </div>
+    </div>
+    <p class="text-muted" style="margin-top:30px">@Model.Login</p>
+</div>

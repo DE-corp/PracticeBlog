@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PracticeBlog.Data.Context;
@@ -23,17 +24,11 @@ internal class Program
 
         builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "PracticeBlog", Version = "v1" }); });
 
-        builder.Services.AddAuthentication(options => options.DefaultScheme = "Coockies").AddCookie("Coockies", options =>
-        {
-            options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
-            {
-                OnRedirectToLogin = redirectContext =>
-                {
-                    redirectContext.HttpContext.Response.StatusCode = 401;
-                    return Task.CompletedTask;
-                }
-            };
-        });
+        builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+              .AddCookie(options =>
+              {
+                  options.LoginPath = new PathString("/Account/Login");
+              });
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
