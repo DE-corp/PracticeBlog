@@ -1,5 +1,5 @@
 ﻿﻿@{
-    ViewData["Title"] = "View users";
+    ViewData["Title"] = "Home Page";
 }
 
 <div clamarging background-white">
@@ -27,6 +27,9 @@
                 </div>
                 <p class="text-muted" style="margin-top:20px">@user.Login</p>
             </div>
+            <form method="get" asp-controller="Users" asp-action="GetUserById" asp-route-id="@user.ID" style="margin-top:20px">
+                <input class="enter_submit" type="submit" value="Просмотреть данные пользователя" />
+            </form>
         </div>
         <br>
     }

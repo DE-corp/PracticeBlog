@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PracticeBlog.Data.Models;
 using PracticeBlog.Data.Repositories;
 
 namespace PracticeBlog.Controllers
 {
+    [Authorize]
     public class TagsController : Controller
     {
         private readonly IRepository<Tag> _repo;
@@ -12,73 +14,53 @@ namespace PracticeBlog.Controllers
         {
             _repo = repo;
         }
-
-
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var tags = await _repo.GetAll();
-            return StatusCode(200, tags);
+            return View(tags);
         }
-
-
         [HttpGet]
         public IActionResult GetTagById()
         {
             return View();
         }
-
-
         [HttpPost]
         public async Task<IActionResult> GetTagById(int id)
         {
             var tag = await _repo.Get(id);
             return View(tag);
         }
-
-
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult Add()
         {
             return View();
         }
-
-
         [HttpPost]
-        public async Task<IActionResult> Register(Tag newTag)
+        public async Task<IActionResult> Add(Tag newTag)
         {
             await _repo.Add(newTag);
             return View(newTag);
         }
-
-
-        [HttpGet]
-        public IActionResult Delete()
-        {
-            return View();
-        }
-
-
         [HttpPost]
-        public async Task<IActionResult> Delete(Tag tag)
+        public async Task<IActionResult> Delete(int id)
         {
+            var tag = await _repo.Get(id);
             await _repo.Delete(tag);
+            return RedirectToAction("Index", "Tags");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var tag = await _repo.Get(id);
             return View(tag);
         }
 
-
-        [HttpGet]
-        public IActionResult Update()
-        {
-            return View();
-        }
-
-
         [HttpPost]
-        public async Task<IActionResult> Update(Tag tag)
+        public async Task<IActionResult> ConfirmUpdating(Tag tag)
         {
             await _repo.Update(tag);
-            return View(tag);
+            return RedirectToAction("Index", "Tags");
         }
     }
 }

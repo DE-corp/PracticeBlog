@@ -1,0 +1,19 @@
+﻿﻿@{
+    ViewData["Title"] = "View role";
+}
+
+<div clamarging background-white">
+    <div class="blog-main">
+        <h2 class="blog-post-title">@Model.Name</h2><br>
+        <p style="border-top:groove; border-bottom:groove; margin-top:20px; margin-bottom:20px"><font style="vertical-align: inherit">@Model.Description</font></p>
+        @if (User.IsInRole("Admin"))
+        {
+            <form method="get" asp-controller="Roles" asp-action="Update" asp-route-id="@Model.ID" style="display:inline-block">
+                <input class="enter_submit" type="submit" value="Редактировать" style="color:green" />
+            </form>
+            <form method="post" asp-controller="Roles" asp-action="Delete" asp-route-id="@Model.ID" style="display:inline-block">
+                <input class="enter_submit" type="submit" value="Удалить" style="color:red" />
+            </form>
+        }
+    </div>
+</div>

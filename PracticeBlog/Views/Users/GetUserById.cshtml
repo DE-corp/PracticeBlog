@@ -24,3 +24,12 @@
     </div>
     <p class="text-muted" style="margin-top:30px">@Model.Login</p>
 </div>
+<form method="get" asp-controller="Users" asp-action="Update" asp-route-id="@Model.ID" style="display:inline-block">
+    <input class="enter_submit" type="submit" value="Редактировать данные" style="color:green" />
+</form>
+<form method="post" asp-controller="Users" asp-action="Delete" asp-route-id="@Model.ID" style="display:inline-block">
+    <input class="enter_submit" type="submit" value="Удалить пользователя" style="color:red" />
+</form>
+<br>
+    </div>
+</div>

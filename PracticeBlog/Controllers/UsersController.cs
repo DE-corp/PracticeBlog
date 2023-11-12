@@ -43,7 +43,7 @@ namespace PracticeBlog.Controllers
             List<Claim> userClaims = new List<Claim>
                         {
                             new Claim(ClaimTypes.Name, user.Login),
-                            new Claim(ClaimTypes.Role, user.Role)
+                            new Claim(ClaimTypes.Role, user.Role),
                         };
 
             var identity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -51,7 +51,15 @@ namespace PracticeBlog.Controllers
             return View("GetUserByID", user);
         }
 
-
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home"); // Редирект на главную страницу после выхода
+        }
+        
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -59,15 +67,8 @@ namespace PracticeBlog.Controllers
             return View(users);
         }
 
-
+        [Authorize]
         [HttpGet]
-        public IActionResult GetUserById()
-        {
-            return View();
-        }
-
-
-        [HttpPost]
         public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _repo.Get(id);
@@ -76,6 +77,7 @@ namespace PracticeBlog.Controllers
 
 
         [HttpGet]
+        [Route("Register")]
         public IActionResult Register()
         {
             return View();
@@ -90,36 +92,32 @@ namespace PracticeBlog.Controllers
             return View(newUser);
         }
 
-
-        [HttpGet]
-        public IActionResult Delete()
-        {
-            return View();
-        }
-
-
+        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Delete(User user)
+        public async Task<IActionResult> Delete(int id)
         {
+            var user = await _repo.Get(id);
             await _repo.Delete(user);
-            return View(user);
+            return RedirectToAction("Index", "Users");
         }
 
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("Update")]
-        public IActionResult Update()
+        public async Task<IActionResult> Update(int id)
         {
-            return View();
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> Update(User user)
-        {
-            await _repo.Update(user);
+            var user = await _repo.Get(id);
             return View(user);
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ConfirmUpdating(User user)
+        {
+            await _repo.Update(user);
+            return RedirectToAction("Index", "Users");
+        }
+
     }
 }

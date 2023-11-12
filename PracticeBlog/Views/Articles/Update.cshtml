@@ -1,0 +1,41 @@
+﻿@model PracticeBlog.Data.Models.Article
+
+@{
+    ViewData["Title"] = "UpdateArticle";
+}
+
+<form class="frm" method="post" asp-controller="Articles" asp-action="ConfirmUpdating">
+    <h1 class="h3 mb-3 fw-normal">Редактирование статьи</h1>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            .Net
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            JavaScript
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Java
+        </label>
+    </div>
+    <div class="form-floating">
+        <label for="floatingInput">Заголовок</label>
+        <input asp-for="Name" class="form-control" id="floatingInput">
+    </div>
+    <div class="form-floating">
+        <label for="floatingInput">Контент</label>
+        <textarea asp-for="Text" class="form-control" id="floatingInput"></textarea>
+    </div>
+    <div>
+        <br>
+        <button class="btn-submit" type="submit">Сохранить изменения</button>
+    </div>
+    <br>
+    <p><a class="text-blue" asp-area="" asp-controller="Articles" asp-action="Index">Выйти без сохранения</a><p />
+</form>

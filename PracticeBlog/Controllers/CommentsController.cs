@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PracticeBlog.Data.Models;
 using PracticeBlog.Data.Repositories;
 
 namespace PracticeBlog.Controllers
 {
+    [Authorize]
     public class CommentsController : Controller
     {
         private readonly IRepository<Comment> _repo;
@@ -23,13 +25,6 @@ namespace PracticeBlog.Controllers
 
 
         [HttpGet]
-        public IActionResult GetCommentById()
-        {
-            return View();
-        }
-
-
-        [HttpPost]
         public async Task<IActionResult> GetCommentById(int id)
         {
             var comment = await _repo.Get(id);
@@ -52,33 +47,28 @@ namespace PracticeBlog.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Delete()
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            var role = await _repo.Get(id);
+            await _repo.Delete(role);
+            return RedirectToAction("Index", "Comments");
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(Comment comment)
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
         {
-            await _repo.Delete(comment);
+            var comment = await _repo.Get(id);
             return View(comment);
         }
 
 
-        [HttpGet]
-        public IActionResult Update()
-        {
-            return View();
-        }
-
-
         [HttpPost]
-        public async Task<IActionResult> Update(Comment comment)
+        public async Task<IActionResult> ConfirmUpdating(Comment comment)
         {
             await _repo.Update(comment);
-            return View(comment);
+            return RedirectToAction("Index", "Comments");
         }
     }
 }

@@ -1,0 +1,20 @@
+﻿﻿@{
+    ViewData["Title"] = "View roles";
+}
+
+<div clamarging background-white">
+    <h4 class="center">Все роли</h4>
+    <a class="text-blue" asp-area="" asp-controller="Tags" asp-action="Add">Добавить роль</a>
+    @foreach (var role in Model)
+    {
+        <div class="card" style="width: 18rem; margin-top:30px">
+            <div class="card-body">
+                <h5 class="card-title" style="color:blue">@role.Name</h5>
+                <p class="text-muted" style="margin-top:30px">@role.Description</p>
+            </div>
+        </div>
+        <form method="get" asp-controller="Roles" asp-action="GetRoleById" asp-route-id="@role.ID" style="margin-top:50px">
+            <input class="enter_submit" type="submit" value="Просмотреть" />
+        </form>
+    }
+</div>

@@ -1,0 +1,27 @@
+﻿﻿@{
+    ViewData["Title"] = "View tags";
+}
+
+<div clamarging background-white">
+    <h4 class="center">Все теги</h4>
+    <a class="text-blue" asp-area="" asp-controller="Tags" asp-action="Add">Добавить тег</a>
+    @foreach (var tag in Model)
+    {
+        <div class="card" style="width: 18rem; margin-top:30px">
+            <div class="card-body">
+                <h5 class="card-title" style="color:blue">@tag.Name</h5>
+                <p class="text-muted" style="margin-top:60px; margin-left: 100px">Статей по тегу: @tag.Articles.Count</p>
+                @if (User.IsInRole("Admin"))
+                {
+                    <form method="get" asp-controller="Tags" asp-action="Update" asp-route-id="@tag.ID" style="display:inline-block">
+                        <input class="enter_submit" type="submit" value="Редактировать" style="color:green" />
+                    </form>
+                    <form method="post" asp-controller="Tags" asp-action="Delete" asp-route-id="@tag.ID" style="display:inline-block">
+                        <input class="enter_submit" type="submit" value="Удалить" style="color:red" />
+                    </form>
+                }
+            </div>
+        </div>
+        <br>
+    }
+</div>

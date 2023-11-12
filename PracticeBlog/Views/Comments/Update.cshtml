@@ -1,0 +1,17 @@
+﻿@model PracticeBlog.Data.Models.Comment
+
+@{
+    ViewData["Title"] = "UpdateComment";
+}
+
+<form class="frm" method="post" asp-controller="Comments" asp-action="ConfirmUpdating">
+    <h1 class="h3 mb-3 fw-normal">Редактирование комментария</h1>
+    <div class="form-floating">
+        <label for="floatingInput">Текст</label>
+        <input asp-for="Text" class="form-control" id="floatingInput">
+    </div>
+    <div>
+        <br>
+        <button class="btn-primary" type="submit">Сохранить</button>
+    </div>
+</form>

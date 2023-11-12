@@ -5,24 +5,23 @@
     ViewData["Title"] = "Authenticate";
 }
 
-<div class="block-reg background-white">
-    <h4 class="center">Добро пожаловать!</h4>
-    <form class="frm" method="post" asp-controller="Users" asp-action="Authenticate">
-        <div asp-validation-summary="ModelOnly"></div>
-        <div>
-            <div class="mrgn">
-                <input asp-for="Login" class="form-control" />
-                <span asp-validation-for="Login" class="text-danger"></span>
-            </div>
-        </div>
-        <div>
-            <div class="mrgn">
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-        </div>
-        <div>
-            <input class="enter_submit" type="submit" value="Войти" />
-        </div>
-    </form>
-</div>
+<form class="frm" method="post" asp-controller="Users" asp-action="Authenticate">
+    <h1 class="h3 mb-3 fw-normal">Вход в приложение</h1>
+    <div class="form-floating">
+        <input asp-for="Login" class="form-control" id="floatingInput" placeholder="Login">
+        <label for="floatingInput">Ваш логин (адрес эл. почты)</label>
+    </div>
+    <div class="form-floating">
+        <input asp-for="Password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Пароль</label>
+    </div>
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Запомнить меня
+        </label>
+    </div>
+    <br>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+    <p display="inline">Еще нет аккаунта?<a class="text-blue" asp-area="" asp-controller="Users" asp-action="Register"> Зарегистрируйтесь</a></p>
+</form>

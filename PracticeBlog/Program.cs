@@ -20,14 +20,15 @@ internal class Program
                 .AddCustomRepository<User, UserRepository>()
                 .AddCustomRepository<Article, ArticlesRepository>()
                 .AddCustomRepository<Comment, CommentRepository>()
-                .AddCustomRepository<Tag, TagRepository>();
+                .AddCustomRepository<Tag, TagRepository>()
+                .AddCustomRepository<Role, RoleRepository>(); ;
 
         builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "PracticeBlog", Version = "v1" }); });
 
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
               .AddCookie(options =>
               {
-                  options.LoginPath = new PathString("/Account/Login");
+                  options.LoginPath = new PathString("/Authenticate");
               });
 
         // Add services to the container.

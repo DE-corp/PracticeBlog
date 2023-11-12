@@ -1,0 +1,18 @@
+﻿@model PracticeBlog.Data.Models.Tag
+
+@{
+    ViewData["Title"] = "UpdateTag";
+}
+
+<form class="frm" method="post" asp-controller="Tags" asp-action="ConfirmUpdating">
+    <h1 class="h3 mb-3 fw-normal">Редактирование тега</h1>
+    <div class="form-floating">
+        <label for="floatingInput">Название</label>
+        <input asp-for="Name" class="form-control" id="floatingInput">
+    </div>
+    <div>
+        <br>
+        <button class="btn-primary" type="submit">Сохранить</button>
+    </div>
+    <p><a class="text-blue" asp-area="" asp-controller="Tags" asp-action="Index">Перейти к списку всех тегов</a><p />
+</form>

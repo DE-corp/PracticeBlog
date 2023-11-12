@@ -1,0 +1,48 @@
+﻿﻿@{
+    ViewData["Title"] = "View article";
+}
+
+<div clamarging background-white">
+    <div class="blog-main">
+        <h2 class="blog-post-title">@Model.Name</h2><br>
+        <div class="tagbox">
+            @if (@Model.Tags.Count != 0)
+            {
+
+                @foreach (var tag in @Model.Tags)
+                {
+                    <span class="badge badge-primary">tag.Name</span>
+
+                }
+            }
+            else
+            {
+                <span class="badge badge-primary">SkillFactory</span>
+            }
+        </div>
+        <p style="border-top:groove; border-bottom:groove; margin-top:20px; margin-bottom:20px"><font style="vertical-align: inherit">@Model.Text</font></p>
+        @if (@Model.UserID != 0)
+        {
+            <p class="text-muted" style="margin-top:10px; margin-left: 100px">@Model.User.Login</p>
+        }
+        <div class="tagbox">
+            @if (@Model.Comments.Count != 0)
+            {
+                <h4 class="blog-post-title">Комментарии к статье</h4>
+                @foreach (var comment in @Model.Comments)
+                {
+                    <p style="border:groove">comment.Text</p>
+                    <span class="badge badge-primary" style="margin:5px,15px">comment.User.Name</span>
+
+                }
+            }
+        </div>
+        <form method="get" asp-controller="Articles" asp-action="Update" asp-route-id="@Model.ID" style="display:inline-block">
+            <input class="enter_submit" type="submit" value="Редактировать" style="color:green" />
+        </form>
+        <form method="post" asp-controller="Articles" asp-action="Delete" asp-route-id="@Model.ID" style="display:inline-block">
+            <input class="enter_submit" type="submit" value="Удалить" style="color:red" />
+        </form>
+    </div>
+    <br>
+</div>
