@@ -9,10 +9,13 @@ namespace PracticeBlog.Controllers
     public class CommentsController : Controller
     {
         private readonly IRepository<Comment> _repo;
+        private readonly ILogger<CommentsController> _logger;
 
-        public CommentsController(IRepository<Comment> repo)
+        public CommentsController(IRepository<Comment> repo, ILogger<CommentsController> logger)
         {
             _repo = repo;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog подключен к CommentsController");
         }
 
 
@@ -20,6 +23,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Index()
         {
             var comments = await _repo.GetAll();
+            _logger.LogInformation("CommentsController - Index");
             return View(comments);
         }
 
@@ -28,6 +32,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> GetCommentById(int id)
         {
             var comment = await _repo.Get(id);
+            _logger.LogInformation("CommentsController - GetArticleById");
             return View(comment);
         }
 
@@ -35,6 +40,7 @@ namespace PracticeBlog.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            _logger.LogInformation("CommentsController - Add");
             return View();
         }
 
@@ -43,6 +49,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Register(Comment newComment)
         {
             await _repo.Add(newComment);
+            _logger.LogInformation("CommentsController - Add - complete");
             return View(newComment);
         }
 
@@ -52,6 +59,7 @@ namespace PracticeBlog.Controllers
         {
             var role = await _repo.Get(id);
             await _repo.Delete(role);
+            _logger.LogInformation("CommentsController - Delete");
             return RedirectToAction("Index", "Comments");
         }
 
@@ -60,6 +68,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Update(int id)
         {
             var comment = await _repo.Get(id);
+            _logger.LogInformation("CommentsController - Update");
             return View(comment);
         }
 
@@ -68,6 +77,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> ConfirmUpdating(Comment comment)
         {
             await _repo.Update(comment);
+            _logger.LogInformation("CommentsController - Update - complete");
             return RedirectToAction("Index", "Comments");
         }
     }

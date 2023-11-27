@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeBlog", "PracticeBlog\PracticeBlog.csproj", "{8F7DB56C-8F82-4A3A-8C7C-362E8ED51927}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeBlog", "PracticeBlog\PracticeBlog.csproj", "{8F7DB56C-8F82-4A3A-8C7C-362E8ED51927}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeBlog.Data", "PracticeBlog.Data\PracticeBlog.Data.csproj", "{2CA62808-CBAF-479E-AFAC-ECD131781886}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeBlog.Data", "PracticeBlog.Data\PracticeBlog.Data.csproj", "{2CA62808-CBAF-479E-AFAC-ECD131781886}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{16080795-9BB3-409F-A384-658072C1871A}"
+	ProjectSection(SolutionItems) = preProject
+		nlog.config = nlog.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

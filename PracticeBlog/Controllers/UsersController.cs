@@ -12,16 +12,20 @@ namespace PracticeBlog.Controllers
     public class UsersController : Controller
     {
         private readonly IRepository<User> _repo;
+        private readonly ILogger<UsersController> _logger;
 
-        public UsersController(IRepository<User> repo)
+        public UsersController(IRepository<User> repo, ILogger<UsersController> logger)
         {
             _repo = repo;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog подключен к UserssController");
         }
 
         [HttpGet]
         [Route("Authenticate")]
         public IActionResult Authenticate()
         {
+            _logger.LogInformation("UsersController - Authenticate");
             return View();
         }
 
@@ -48,6 +52,7 @@ namespace PracticeBlog.Controllers
 
             var identity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+            _logger.LogInformation("UsersController - Authenticate - complete");
             return View("GetUserByID", user);
         }
 
@@ -56,6 +61,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            _logger.LogInformation("UsersController - LogOut");
             return RedirectToAction("Index", "Home"); // Редирект на главную страницу после выхода
         }
         
@@ -64,6 +70,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await _repo.GetAll();
+            _logger.LogInformation("UsersController - Index");
             return View(users);
         }
 
@@ -72,6 +79,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _repo.Get(id);
+            _logger.LogInformation("UsersController - GetUserById");
             return View(user);
         }
 
@@ -80,6 +88,7 @@ namespace PracticeBlog.Controllers
         [Route("Register")]
         public IActionResult Register()
         {
+            _logger.LogInformation("UsersController - Register");
             return View();
         }
 
@@ -89,6 +98,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Register(User newUser)
         {
             await _repo.Add(newUser);
+            _logger.LogInformation("UsersController - Register - complete");
             return View(newUser);
         }
 
@@ -98,6 +108,7 @@ namespace PracticeBlog.Controllers
         {
             var user = await _repo.Get(id);
             await _repo.Delete(user);
+            _logger.LogInformation("UsersController - Delete");
             return RedirectToAction("Index", "Users");
         }
 
@@ -108,6 +119,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> Update(int id)
         {
             var user = await _repo.Get(id);
+            _logger.LogInformation("UsersController - Update");
             return View(user);
         }
 
@@ -116,6 +128,7 @@ namespace PracticeBlog.Controllers
         public async Task<IActionResult> ConfirmUpdating(User user)
         {
             await _repo.Update(user);
+            _logger.LogInformation("UsersController - Update - complete");
             return RedirectToAction("Index", "Users");
         }
 

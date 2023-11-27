@@ -26,19 +26,19 @@
     </div>
     <div class="form-floating">
         <label for="floatingInput">Имя</label>
-        <input asp-for="FirstName" class="form-control" id="floatingInput">
+        <input asp-for="FirstName" class="form-control" id="floatingInput" required>
     </div>
     <div class="form-floating">
         <label for="floatingInput">Фамилия</label>
-        <input asp-for="LastName" class="form-control" id="floatingInput">
+        <input asp-for="LastName" class="form-control" id="floatingInput" required>
     </div>
     <div class="form-floating">
         <label for="floatingInput">Логин</label>
-        <input asp-for="Login" class="form-control" id="floatingInput">
+        <input asp-for="Login" class="form-control" id="floatingInput" required>
     </div>
     <div class="form-floating">
         <label for="floatingPassword">Пароль</label>
-        <input asp-for="Password" class="form-control" id="floatingPassword">
+        <input asp-for="Password" class="form-control" id="floatingPassword" required minlength="3">
     </div>
     <div class="form-floating">
         <label for="floatingPassword">Возраст</label>

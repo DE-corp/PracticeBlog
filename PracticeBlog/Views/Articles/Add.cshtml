@@ -28,11 +28,11 @@
             </div>
             <div class="form-floating">
                 <label for="floatingInput">Заголовок</label>
-                <input asp-for="Name" class="form-control" id="floatingInput">
+                <input required asp-for="Name" class="form-control" id="floatingInput">
             </div>
             <div class="form-floating">
                 <label for="floatingInput">Контент</label>
-                <textarea asp-for="Text" class="form-control" id="floatingInput"></textarea>        
+                <textarea asp-for="Text" class="form-control" id="floatingInput" required minlength="50"></textarea>
             </div>
             <div>
                 <br>

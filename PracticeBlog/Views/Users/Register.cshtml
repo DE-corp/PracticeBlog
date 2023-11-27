@@ -4,6 +4,9 @@
     ViewData["Title"] = "Register";
 }
 
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
+
 <div>
     @if (Model == null)
     {
@@ -11,19 +14,19 @@
             <h1 class="h3 mb-3 fw-normal">Регистрация пользователя</h1>
             <div class="form-floating">
                 <label for="floatingInput">Имя</label>
-                <input asp-for="FirstName" class="form-control" id="floatingInput">
+                <input asp-for="FirstName" class="form-control" id="floatingInput" required>
             </div>
             <div class="form-floating">
                 <label for="floatingInput">Фамилия</label>
-                <input asp-for="LastName" class="form-control" id="floatingInput">
+                <input asp-for="LastName" class="form-control" id="floatingInput" required>
             </div>
             <div class="form-floating">
                 <label for="floatingInput">Логин</label>
-                <input asp-for="Login" class="form-control" id="floatingInput">
+                <input asp-for="Login" class="form-control" id="floatingInput" required>
             </div>
             <div class="form-floating">
                 <label for="floatingPassword">Пароль</label>
-                <input asp-for="Password" class="form-control" id="floatingPassword">
+                <input asp-for="Password" class="form-control" id="floatingPassword" required minlength="3">
             </div>
             <div class="form-floating">
                 <label for="floatingPassword">Возраст</label>
