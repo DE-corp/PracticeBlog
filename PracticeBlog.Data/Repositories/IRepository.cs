@@ -8,6 +8,7 @@ namespace PracticeBlog.Data.Repositories
         Task<T> Get(int id);
         Task Add(T item);
         Task Update(T item);
+        Task Update(T item, T newItem);
         Task Delete(T item);
         User GetByLogin(string login);
     }

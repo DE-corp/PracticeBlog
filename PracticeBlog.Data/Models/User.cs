@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PracticeBlog.Data.Models
 {
@@ -27,7 +28,10 @@ namespace PracticeBlog.Data.Models
         public string Password { get; set; }
         public string Role { get; set; } = "Admin";
         public int Age { get; set; }
+
+        [JsonIgnore]
         public List<Role> Roles { get; set; } = new List<Role>();
+        [JsonIgnore]
         public List<Comment> Comments { get; set; } = new List<Comment>();
 
     }

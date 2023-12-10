@@ -47,6 +47,13 @@ namespace PracticeBlog.Data.Repositories
             await _db.SaveChangesAsync();
         }
 
+        public async Task Update(T item, T newItem)
+        {
+            item = newItem;
+            Set.Update(item);
+            await _db.SaveChangesAsync();
+        }
+
         public User GetByLogin(string login)
         {
             return Set.FirstOrDefault(x => (x as User).Login == login) as User;
